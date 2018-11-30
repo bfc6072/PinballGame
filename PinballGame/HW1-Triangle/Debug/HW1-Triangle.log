@@ -1,16 +1,32 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (HW1-Triangle.vcxproj, HW2-Square (DESKTOP-6HTDEGR's conflicted copy 2018-10-04).vcxproj, HW2-Square (DESKTOP-6HTDEGR's conflicted copy 2018-10-26).vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Shader.cpp
+  glad.c
   main.cpp
-d:\pinball_repo\opengl tutorial\hw1-triangle\mesh.h(61): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(185): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(246): warning C4305: 'argument': truncation from 'double' to 'float'
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(247): warning C4305: 'argument': truncation from 'double' to 'float'
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(391): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(392): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(396): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(397): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(399): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(400): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-d:\pinball_repo\opengl tutorial\hw1-triangle\main.cpp(410): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\mesh.h(61): warning C4244: 'argument': conversion from 'size_t' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(185): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(246): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(247): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(391): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(392): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(396): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(397): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(399): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(400): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\barry\documents\pinballgame\pinballgame\hw1-triangle\main.cpp(410): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  Shader.cpp
+  stb_image.cpp
   Generating Code...
-  HW1-Triangle.vcxproj -> D:\Pinball_Repo\OpenGL Tutorial\Debug\HW2-Square.exe
+glfw3.lib(context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(context.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(init.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(input.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(input.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(monitor.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(vulkan.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(vulkan.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(window.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_init.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_init.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_joystick.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_joystick.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_monitor.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_monitor.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_time.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_time.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_tls.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_tls.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(win32_window.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(win32_window.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(wgl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(wgl_context.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+glfw3.lib(egl_context.obj) : warning LNK4099: PDB 'glfw.pdb' was not found with 'glfw3.lib(egl_context.obj)' or at 'C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\glfw.pdb'; linking object as if no debug info
+  HW1-Triangle.vcxproj -> C:\Users\Barry\Documents\PinballGame\PinballGame\Debug\HW2-Square.exe
