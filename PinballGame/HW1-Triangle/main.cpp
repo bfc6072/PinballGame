@@ -9,7 +9,7 @@
 #include "Shader.h"
 #include "stb_image.h"
 #include "Camera.h"
-#include "Model.h"
+#include "Object.h"
 using namespace std;
 using namespace glm;
 
@@ -139,7 +139,22 @@ int main()
 	glm::vec3(0.0f,  0.0f, -3.0f)
 	};
 
-	Model ourModel("resources/Hiker_2.1.obj");
+	Object M_Frame("resources/Frame.obj");
+	Object M_Paddle_L("resources/Paddle_Left.obj");
+	Object M_Paddle_R("resources/Paddle_Right.obj");
+	Object M_Bumper_BL("resources/Bumper_BotLeft.obj");
+	Object M_Bumper_BR("resources/Bumper_BotRight.obj");
+	Object M_Bumper_T("resources/Bumper_Top.obj");
+	Object objectList[] =
+	{
+		M_Frame,
+		M_Paddle_L,
+		M_Paddle_R,
+		M_Bumper_BL,
+		M_Bumper_BR,
+		M_Bumper_T
+	};
+	
 
 	//Setup Cube VAO and VBO
 	unsigned int cubeVAO, VBO;
@@ -169,15 +184,18 @@ int main()
 #pragma endregion
 
 #pragma region Load Texture
-	unsigned int diffuse = LoadTexture("container.png");	
-	unsigned int specular = LoadTexture("container_specular.png");
+	unsigned int crate_diffuse = LoadTexture("container.png");	
+	unsigned int crate_specular = LoadTexture("container_specular.png");
+	unsigned int pinball_diffuse = LoadTexture("resources/Pinball.jpg");
+
 
 #pragma endregion
 
 #pragma region Game Loop
 	lightingShader.StartPipelineProgram();
-	lightingShader.setInt("material.diffuse", 0); // or with shader class
+	lightingShader.setInt("material.diffuse", 2); // or with shader class
 	lightingShader.setInt("material.specular", 1);
+
 	//====Game loop====
 	while (!glfwWindowShouldClose(window)) //Check if the window is supposed to close
 	{
@@ -195,9 +213,11 @@ int main()
 
 		//Bind textures
 		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, diffuse);
+		glBindTexture(GL_TEXTURE_2D, crate_diffuse);
 		glActiveTexture(GL_TEXTURE1);
-		glBindTexture(GL_TEXTURE_2D, specular);
+		glBindTexture(GL_TEXTURE_2D, crate_specular);
+		glActiveTexture(GL_TEXTURE2);
+		glBindTexture(GL_TEXTURE_2D, pinball_diffuse);
 
 		//View/Projection/world transform
 		mat4 projection = perspective(glm::radians(camera.Zoom), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
@@ -209,33 +229,38 @@ int main()
 
 		//####Lighting shader######
 		#pragma region Lighting shader
-		lightsettings settings; // = { "pointLights[0]", pointLightPositions[0], vec3(0.5f, 0.5f, 0.5f), vec3(1.0f, 0.0f, 0.0f),
-								//	vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.09f, 0.032f };
+		lightsettings settings;
+
 		// directional light
 		lightingShader.setVec3("dirLight.direction", vec3(-0.2f, -1.0f, -0.3f));
 		lightingShader.setVec3("dirLight.ambient", vec3(0.05f, 0.05f, 0.05f));
 		lightingShader.setVec3("dirLight.diffuse", vec3(0.4f, 0.4f, 0.4f));
 		lightingShader.setVec3("dirLight.specular", vec3(0.5f, 0.5f, 0.5f));
 		// point light 1
-		settings = { "pointLights[0]", pointLightPositions[0], vec3(0.5f, 0.5f, 0.5f),
-					vec3(1.0f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.09f, 0.032f };
+		settings = { "pointLights[0]", objectList[3].position, vec3(0.5f, 0.5f, 0.5f),
+					vec3(.2f, 0.0f, 0.0f), vec3(1.0f, 1.0f, 1.0f), 1.0f, 0.09f, 0.032f };
 		lightingShader.setPointLight(settings);
 
 		// point light 2
 		settings.name = "pointLights[1]";
-		settings.position = pointLightPositions[1];
+		settings.ambient = vec3(0.0f, 0.0f, .2f);
+		settings.specular = vec3(1.0f, 1.0f, 1.f);
+
+		settings.position = objectList[4].position;
 		lightingShader.setPointLight(settings);
 
 		// point light 3
 		settings.name = "pointLights[2]";
-		settings.position = pointLightPositions[2];
+		settings.ambient = vec3(0.0f, .2f, 0.0f);
+		settings.position = objectList[5].position;
 		lightingShader.setPointLight(settings);
 
 		// point light 4
 		settings.name = "pointLights[3]";
+		settings.ambient = vec3(0.0f, 0.0f, 0.0f);
 		settings.position = pointLightPositions[3];
 		lightingShader.setPointLight(settings);
-		// spotLight
+		//spotLight
 		lightingShader.setPointLight(settings);
 		lightingShader.setVec3("spotLight.position", camera.Position);
 		lightingShader.setVec3("spotLight.direction", camera.Front);
@@ -253,12 +278,16 @@ int main()
 		glBindVertexArray(cubeVAO);
 		model = scale(model, glm::vec3(1.2f, 1.4f, 1.2f));
 		lightingShader.setMat4("model", model);
-		glDrawArrays(GL_TRIANGLES, 0, 36);
+		//glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		model = mat4(1.0f);
-		model = scale(model, glm::vec3(0.1f, 0.1f, 0.1f));	// it's a bit too big for our scene, so scale it down
 		lightingShader.setMat4("model", model);
-		ourModel.Draw(lightingShader);
+
+		//Draw our Objects
+		for (int i = 0; i < 6; i++)
+		{
+			objectList[i].Draw(lightingShader);
+		}
 		
 
 		//Also draw the lamp
@@ -268,7 +297,7 @@ int main()
 		lampShader.StartPipelineProgram(projection, view, model);
 
 		glBindVertexArray(lampVAO);
-		for (unsigned int i = 0; i < 4; i++)
+		/*for (unsigned int i = 0; i < 4; i++)
 		{
 			switch (i)
 			{
@@ -290,6 +319,14 @@ int main()
 			model = scale(model, vec3(0.2f));
 			lampShader.setMat4("model", model);
 			glDrawArrays(GL_TRIANGLES, 0, 36);
+		}*/
+
+		lampShader.setVec3("color", vec3(0.0, 0.0, 1.0));
+		model = mat4(1.0f);
+		lampShader.setMat4("model", model);
+		for (int i = 2; i < 6; i++)
+		{
+			objectList[i].Draw(lampShader);
 		}
 
 		//Check and call events | Buffer swapping

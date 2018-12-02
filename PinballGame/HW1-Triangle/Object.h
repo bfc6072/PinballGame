@@ -21,7 +21,7 @@ using namespace std;
 
 unsigned int TextureFromFile(const char *path, const string &directory, bool gamma = false);
 
-class Model
+class Object
 {
 public:
 	/*  Model Data */
@@ -29,10 +29,10 @@ public:
 	vector<Mesh> meshes;
 	string directory;
 	bool gammaCorrection;
-
+	glm::vec3 position;
 	/*  Functions   */
 	// constructor, expects a filepath to a 3D model.
-	Model(string const &path, bool gamma = false) : gammaCorrection(gamma)
+	Object(string const &path, bool gamma = false) : gammaCorrection(gamma)
 	{
 		loadModel(path);
 	}
@@ -81,7 +81,7 @@ private:
 		{
 			processNode(node->mChildren[i], scene);
 		}
-
+		//AveragePosition();
 	}
 
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene)
@@ -196,6 +196,22 @@ private:
 		}
 		return textures;
 	}
+
+	void AveragePosition()
+	{
+		if (meshes.size() < 1) return;
+
+		int totalVerts = meshes[0].vertices.size();
+		for (unsigned int i = 0; i < totalVerts; i++)
+		{
+			position.x += meshes[0].vertices[i].Position.x;
+			position.y += meshes[0].vertices[i].Position.y;
+			position.z += meshes[0].vertices[i].Position.z;
+		}
+		position.x = position.x / totalVerts;
+		position.y = position.y / totalVerts;
+		position.z = position.y / totalVerts;
+	}
 };
 
 
@@ -238,3 +254,4 @@ unsigned int TextureFromFile(const char *path, const string &directory, bool gam
 
 	return textureID;
 }
+
